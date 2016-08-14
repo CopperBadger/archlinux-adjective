@@ -28,5 +28,15 @@ if [[ -e "$HOME/.config/nvim" ]]; then
 fi
 
 echo "Configuring Neovim..."
-ln -s "$HOME/.vim" "$HOME/.config/nvim"
-ln -s "$HOME/.vimrc" "$HOME/.config/nvim/init.vim"
+
+if [! -e "$HOME/.config/nvim" ]; then
+  ln -s "$HOME/.vim" "$HOME/.config/nvim"
+else
+  echo "~/.config/nvim already exists"
+fi
+
+if [! -e "$HOME/.config/nvim/init.vim"]; then
+  ln -s "$HOME/.vimrc" "$HOME/.config/nvim/init.vim"
+else
+  echo "~/.config/nvim/init.vim already exists"
+fi

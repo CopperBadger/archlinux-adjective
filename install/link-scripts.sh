@@ -8,6 +8,8 @@ if [[ -e "$HOME/sbin" ]]; then
   if [[ "${cont}" != "y" ]]; then
     echo "Script linking aborted"
     exit 1
+  else
+    rm "${home}/sbin"
   fi
 fi
 
@@ -28,6 +30,6 @@ for f in ../util/*; do
   fi
   if [[ "${replace}" == "y" ]]; then
     echo "Linking in ${fname} ..."
-    sudo ln -fs "$(realpath ${f})" "/usr/local/sbin/${fname}"
+    sudo ln -fs "$(realpath ${f})/${fname}" "/usr/local/sbin/${fname}"
   fi
 done
