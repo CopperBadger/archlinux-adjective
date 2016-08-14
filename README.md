@@ -1,4 +1,4 @@
-# system-adjective
+# archlinux-adjective
 
 Welcome to my Arch laptop setup! Complete with install scripts!
 
