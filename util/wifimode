@@ -1,0 +1,4 @@
+iname=wlp2s0
+ip link set $iname down
+iwconfig $iname mode $1
+ip link set $iname up

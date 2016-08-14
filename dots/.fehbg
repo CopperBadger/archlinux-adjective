@@ -1,0 +1,2 @@
+#!/bin/sh
+feh  --bg-scale '/home/copper/Development/system-adjective/dots/.default-wallpaper.png' 

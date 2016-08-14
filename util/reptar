@@ -1,0 +1,121 @@
+#!/bin/bash
+
+doc="
+RepTAR CLI Fontend For tar
+
+    reptar [MODE] [ARCHIVE] [FILES ...]
+    # Examples
+    reptar extract myarchive.tar.gz
+    reptar view myarchive.tar.bz2
+    reptar create myarchive.tZ file1.txt file2.bin file3.foo
+
+Reptar is a simple, easy-to-use frontend for extracting, viewing, and creating
+tarballs and zip files. Support is provided for plain tar archives, as well as
+those compressed using gzip, bzip2, xz, lzip, lzop, lzma, and compress. Plain
+zip archives are supported as well. File extensions are interpreted
+automatically, eliminating the need to remember any pesky compression options
+or flags!
+"
+
+if [[ -z "$2" || "$1" == "help" ]]; then
+  echo "$doc"
+  exit 0
+fi
+
+mode=$1
+fname=$2
+fargs="${@:3}"
+ttype=$( echo "${fname}" | sed -Ee 's/^.+\.//' )
+
+
+# Zips are different, handle them right away
+if [[ "$ttype" == "zip" ]]; then
+  case $mode in
+    extract)
+      unzip "${fname}"
+      ;;
+    view)
+      unzip -l "${fname}"
+      ;;
+    create)
+      zip "${fname}" ${fargs}
+      ;;
+  esac
+  exit 0
+fi
+
+# Otherwise it's a tar
+iscmd() {
+  if ! path=$(type -p "$1") || [ -z "${path}" ]; then
+    echo 0
+  else
+    echo 1
+  fi
+}
+
+action=""
+variant=""
+flags=""
+support=""
+
+case $mode in
+  extract)
+    action=x
+    ;;
+  view)
+    action=t
+    ;;
+  create)
+    action=c
+    ;;
+  *)
+    echo "\"$mode\": unknown mode"
+    exit 1
+    ;;
+esac
+
+case $ttype in
+  gz|tgz)
+    variant=z
+    support=gzip
+    ;;
+  bz2|tb2|tbz|tbz2)
+    variant=j
+    support=bzip2
+    ;;
+  xz|txz)
+    variant=J
+    support=xz
+    ;;
+  Z|tZ)
+    variant=Z
+    support=compress
+    ;;
+  lzma|tlz)
+    flags=" --lzma"
+    support=lzma
+    ;;
+  lzop)
+    flags=" --lzop"
+    support=lzop
+    ;;
+  lz)
+    flags=" --lzip"
+    support=lzip
+    ;;
+  tar)
+    ;;
+  *)
+    echo "\"$ttype\": unknown file type"
+    exit 1
+    ;;
+esac
+
+
+# Check that support compressor is installed
+if [[ ! -z "${support}" && "0" == "$(iscmd ${support})" ]]; then
+  echo "Cannot complete command, '${support}' must be installed."
+  exit 1
+fi
+
+tar ${flags} -${action}${variant}vf "${fname}" ${fargs}

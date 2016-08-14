@@ -1,0 +1,33 @@
+#!/bin/bash
+
+mode=`cat $HOME/.wallpapers/mode`
+linkname="default"
+
+case $mode in
+  DAY)
+    if [[ -z "$1" ]]; then
+      linkname=`timeofday`
+    else
+      linkname="$1"
+    fi
+    ;;
+esac
+
+linkpath="$HOME/.wallpapers/$linkname"
+if [[ -e "$linkpath" ]]; then
+  EXISTING=`readlink -f "$linkpath"`
+  ranger --choosefile="/tmp/bkg-select" --selectfile="$EXISTING" --cmd="sort mtime"
+  
+  if [[ -e "/tmp/bkg-select" ]]; then
+    echo "Updating link $linkpath"
+    ln -fs "`cat /tmp/bkg-select`" "$linkpath"
+    rm /tmp/bkg-select
+    update-wallpaper
+  else
+    echo "Cancelled"
+  fi
+else
+  echo "$linkpath: No such link"
+fi
+
+
