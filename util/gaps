@@ -1,0 +1,25 @@
+#!/bin/bash
+
+case $1 in
+  focus)
+    i3 gaps outer current set 0
+    i3 gaps inner current set 8
+    ;;
+  pretty)
+    i3 gaps outer current set 64
+    i3 gaps inner current set 12
+    ;;
+  work)
+    i3 gaps outer current set 16
+    i3 gaps inner current set 8
+    ;;
+  none)
+    i3 gaps outer current set 0
+    i3 gaps inner current set 0
+    ;;
+  *)
+    i3 gaps outer current set $1
+    i3 gaps inner current set $2
+    ;;
+  
+esac > /dev/null

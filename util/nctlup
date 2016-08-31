@@ -1,0 +1,6 @@
+echo "Setting interface down..."
+sudo ip link set wlp2s0 down
+echo "Disabling all profiles..."
+sudo netctl stop-all
+echo "Enabling wifi profile \"$1\"..."
+sudo netctl start $1

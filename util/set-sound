@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#sink="$(pacmd list-sinks | awk -v q="$1" '/name: <.*q.*>/ {print $2} ' | tr -d '<>')"
+sink="$(pacmd list-sinks | grep "name:.*$1" | cut -d ":" -f 2 | tr -d '<>')"
+
+if [ -z "${sink}" ]; then
+  echo "No matching sink found. Available sinks are show below:"
+  pacmd list-sinks | grep "name:"
+  exit 1
+fi
+
+pacmd "set-default-sink ${sink}"

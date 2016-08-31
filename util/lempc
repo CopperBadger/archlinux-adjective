@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Handle mpc input and trigger lemonbar update
+
+case $1 in
+  pause)
+    sta=$(mpc | awk -F'[\\[\\]]' '/^\[/ { print $2 }')
+    if [[ $sta == "paused" ]]; then
+      mpc play
+    else
+      mpc pause
+    fi
+    
+    ;;
+  *)
+    mpc $1
+    ;;
+esac > /dev/null
+
+ 
+printf "%s%s\n" "MPD" "$(mpc current -f '[[%artist% - ]%title%]|[%file%]' 2>&1 | head -c 70)" > "/tmp/i3_lemonbar_$USER"
