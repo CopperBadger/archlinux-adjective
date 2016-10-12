@@ -15,6 +15,6 @@ for f in ../dots/.*; do
   fi
   if [[ "${replace}" == "y" ]]; then
     echo "Linking in ${fname} ..."
-    ln -fs "$(realpath ${f})/${fname}" "$HOME/${fname}"
+    ln -fs "$(realpath ${f})" "$HOME/${fname}"
   fi
 done

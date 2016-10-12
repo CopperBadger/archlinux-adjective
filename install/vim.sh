@@ -17,7 +17,7 @@ echo "Installing Vundle..."
 mkdir -p "$HOME/.vim/bundle"
 cd "$HOME/.vim/bundle"
 git clone https://github.com/VundleVim/Vundle.vim.git
-vim +PluginInstall +qall
+nvim +PluginInstall +qall
 
 cd "${here}"
 
@@ -29,13 +29,13 @@ fi
 
 echo "Configuring Neovim..."
 
-if [! -e "$HOME/.config/nvim" ]; then
+if [ ! -e "$HOME/.config/nvim" ]; then
   ln -s "$HOME/.vim" "$HOME/.config/nvim"
 else
   echo "~/.config/nvim already exists"
 fi
 
-if [! -e "$HOME/.config/nvim/init.vim"]; then
+if [ ! -e "$HOME/.config/nvim/init.vim" ]; then
   ln -s "$HOME/.vimrc" "$HOME/.config/nvim/init.vim"
 else
   echo "~/.config/nvim/init.vim already exists"

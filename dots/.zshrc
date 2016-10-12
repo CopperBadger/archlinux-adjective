@@ -38,7 +38,7 @@ zstyle ':vcs_info:git:*' formats "$(branch) %b "
 source ~/.zsh/git-flow-completion/git-flow-completion.zsh
 
 # RVM
-source ~/.profile
+# source ~/.profile
 
 # Colorization
 autoload -Uz colors && colors
@@ -67,7 +67,7 @@ bindkey "^K" up-line-or-history
 alias ls='ls --color=always'
 alias vol='lemonvol'
 alias mute='lemonvol M'
-alias bl='xbacklight -set'
+alias bl='light -S'
 alias clock='date +%c'
 alias rm='safe-rm'
 
@@ -79,11 +79,32 @@ alias vim='nvim'
 alias gst='git status'
 alias gd='git diff'
 
-alias ne='sudo netctl edit'
+ne(){
+  sudo vim /etc/netctl/$1
+}
 alias nu='nctlup'
 alias ns='sudo netctl status'
 
+alias pa='pacaur'
+alias pas='pacaur -S'
+alias yaourt='pacaur'
+
+alias ffont='fc-list | grep'
+
+
+# Jump Script
+j() {
+  if [ ! -e "$HOME/.jumps/$1" ]; then
+    echo "$1: No such jump"
+  else
+    cd "$(realpath $HOME/.jumps/$1)"
+  fi
+}
+
 # Print battery percentage on startup
 echo -e " Battery `batpct`"
+
+# Source private, non vc'd stuff
+source "$HOME/.zsh-profile"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

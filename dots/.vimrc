@@ -19,7 +19,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-surround'
 Plugin 'terryma/vim-multiple-cursors'
-Plugin 'SirVer/ultisnips'
+" Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'majutsushi/tagbar'
 Plugin 'jistr/vim-nerdtree-tabs'
@@ -30,7 +30,6 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'morhetz/gruvbox'
 Plugin 'haskell.vim'
 Plugin 'kchmck/vim-coffee-script'
-Plugin 'floobits/floobits-neovim'
 
 call vundle#end()
 

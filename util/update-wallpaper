@@ -2,7 +2,7 @@
 
 mode=`cat $HOME/.wallpapers/mode`
 
-path=`readlink -f "$HOME/.wallpapers/default"`
+tgt=`readlink -f "$HOME/.wallpapers/default"`
 case $mode in
   DAY)
     if [[ -z "$1" ]]; then
@@ -22,4 +22,6 @@ case $mode in
     ;;
 esac
 
+echo "Mode is $mode"
+echo "Changing to $tgt"
 feh --bg-fill "$tgt"

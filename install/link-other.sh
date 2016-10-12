@@ -31,6 +31,6 @@ for f in ../x11/*.conf; do
   fi
   if [[ "${replace}" == "y" ]]; then
     echo "Linking in x11 configuration for ${dirname}"
-    ln -fs "$(realpath ${fname})/${fname}" "/etc/X11/xorg.conf.d/${fname}" 
+    ln -fs "$(realpath ${fname})" "/etc/X11/xorg.conf.d/${fname}" 
   fi
 done

@@ -30,6 +30,6 @@ for f in ../util/*; do
   fi
   if [[ "${replace}" == "y" ]]; then
     echo "Linking in ${fname} ..."
-    sudo ln -fs "$(realpath ${f})/${fname}" "/usr/local/sbin/${fname}"
+    sudo ln -fs "$(realpath ${f})" "/usr/local/sbin/${fname}"
   fi
 done

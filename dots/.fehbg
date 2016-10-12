@@ -1,2 +1,2 @@
 #!/bin/sh
-feh  --bg-scale '/home/copper/Development/system-adjective/dots/.default-wallpaper.png' 
+feh  --bg-fill '/home/copper/Pictures/Wallpapers/photography/snowy-forest.jpg' 
