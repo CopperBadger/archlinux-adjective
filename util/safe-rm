@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [[ $# -eq 2 && "$1" =~ "-r" ]]; then
-  echo "WARNING!!! You have specified two rm arguments, are you sure that you aren't triying to move something?"
+if [[ $# -eq 2 && "$1" != "-r" ]]; then
+  echo "WARNING!!! You have specified two rm arguments, are you sure that you aren't trying to move something?"
   echo -n "Continue with deletion? [yN] "
   read answer;
   if [[ "${answer}" == "y" ]]; then
