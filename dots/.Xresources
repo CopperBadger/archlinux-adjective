@@ -2,6 +2,10 @@
 *scrollBar: false
 Xcursor.theme: Breeze-Obsidian
 
+! --- Rofi
+rofi.color-normal: #282828, #ebdbb2, #282828, #1d2021, #ebdbb2
+rofi.color-window: #282828, #282828
+
 ! --- XRES SRC
 *foreground:    #ebdbb2
 *background:    #282828
