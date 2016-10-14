@@ -21,4 +21,4 @@ c_black_l="665c54"
 # --- APPLY XRES END
 
 width=1366
-rofi -show run -width $(( width )) -location 6 -lines 4 -bw 0 -font "Roboto Regular 14" -padding 48 -separator-style none
+rofi -show run -width 100 -location 2 -lines 4 -bw 0 -font "Roboto Regular 14" -padding 48 -separator-style none

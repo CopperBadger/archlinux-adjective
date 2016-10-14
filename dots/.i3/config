@@ -30,7 +30,7 @@ set $mod Mod4
 set $ws1 9 web
 set $ws2 8 sh
 set $ws3 7 app
-set $ws4 6 mail
+set $ws4 6 mail
 set $ws5 5 sh2
 set $ws6 4 sh3
 set $ws7 3 sh4

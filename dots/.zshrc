@@ -85,12 +85,16 @@ ne(){
 alias nu='nctlup'
 alias ns='sudo netctl status'
 
+# Package management aliases
 alias pa='pacaur'
 alias pas='pacaur -S'
 alias yaourt='pacaur'
+pfind() {
+  # Search the Arch repo and AUR for a package with colors
+  pacaur -Ss --color always $1 | less -R
+}
 
 alias ffont='fc-list | grep'
-
 
 # Jump Script
 j() {
