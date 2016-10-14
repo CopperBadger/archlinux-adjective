@@ -1,5 +1,5 @@
 [global]
-    font = Monospace 8
+    font = Roboto 10
 
     # Allow a small subset of html markup in notifications and formats:
     #   <b>bold</b>
@@ -24,7 +24,7 @@
     #   %I  iconname (without its path)
     #   %p  progress value if set ([  0%] to [100%]) or nothing
     # Markup is allowed
-    format = "<b>%s</b>\n%b"
+    format = "<b>%s</b> — %b"
 
     # Sort messages by urgency.
     sort = yes
@@ -54,7 +54,6 @@
     # Ignore newlines '\n' in notifications.
     ignore_newline = no
 
-
     # The geometry of the window:
     #   [{width}]x{height}[+/-{x}+/-{y}]
     # The geometry of the message window.
@@ -67,7 +66,7 @@
     # the top and down respectively.
     # The width can be negative.  In this case the actual width is the
     # screen width minus the width defined in within the geometry option.
-    geometry = "300x5-30+20"
+    geometry = "x48+0-34"
 
     # Shrink window if it's smaller than the width.  Will be ignored if
     # width is 0.
@@ -121,13 +120,13 @@
     # Draw a line of "separator_height" pixel height between two
     # notifications.
     # Set to 0 to disable.
-    separator_height = 2
+    separator_height = 1
 
     # Padding between text and separator.
-    padding = 8
+    padding = 16
 
     # Horizontal padding.
-    horizontal_padding = 8
+    horizontal_padding = 16
 
     # Define a color for the separator.
     # possible values are:
@@ -135,12 +134,12 @@
     #  * foreground: use the same color as the foreground;
     #  * frame: use the same color as the frame;
     #  * anything else will be interpreted as a X color.
-    separator_color = frame
+    separator_color = auto
 
     # Print a notification on startup.
     # This is mainly for error detection, since dbus (re-)starts dunst
     # automatically after a crash.
-    startup_notification = false
+    startup_notification = true
 
     # dmenu path.
     dmenu = /usr/bin/dmenu -p dunst:
@@ -155,8 +154,8 @@
     icon_folders = /usr/share/icons/gnome/16x16/status/:/usr/share/icons/gnome/16x16/devices/
 
 [frame]
-    width = 3
-    color = "#aaaaaa"
+    width = 0
+    color = "#282828"
 
 [shortcuts]
 
@@ -182,18 +181,18 @@
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
     # Otherwise the "#" and following would be interpreted as a comment.
-    background = "#222222"
-    foreground = "#888888"
+    background = "#1d2021"
+    foreground = "#ebdbb2"
     timeout = 10
 
 [urgency_normal]
-    background = "#285577"
-    foreground = "#ffffff"
+    background = "#1d2021"
+    foreground = "#ebdbb2"
     timeout = 10
 
 [urgency_critical]
-    background = "#900000"
-    foreground = "#ffffff"
+    background = "#fb4934"
+    foreground = "#fbf1c7"
     timeout = 0
 
 
