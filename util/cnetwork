@@ -1,0 +1,13 @@
+#!/bin/bash
+
+ntwk="$(iwgetid -r)"
+if [ -z "${ntwk}" ]; then
+  ntwk="$(netctl list | awk '/\*.*/ { print toupper($2) }')"
+  if [ -z "${ntwk}" ]; then
+    echo "Not Connected"
+  else
+    echo "${ntwk}"
+  fi
+else
+  echo "${ntwk}"
+fi

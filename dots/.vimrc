@@ -37,7 +37,7 @@ call vundle#end()
 filetype off
 syntax on
 set scrolloff=8
-set synmaxcol=120
+set synmaxcol=512
 
 " Syntastic configuration
 let g:syntastic_always_populate_loc_list = 1
@@ -97,6 +97,8 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 map <space> :
 imap kj <ESC>
 vmap vkj <ESC>
+imap kq <ESC>A
+imap kw <ESC>O
 
 " Life-improvers
 nmap - ^
@@ -115,14 +117,6 @@ nnoremap <Leader>e :NERDTreeTabsToggle<CR>
 nnoremap vimr :tabnew ~/.vimrc<CR>
 nnoremap <Leader>xr :tabnew ~/.Xresources<CR>
 nnoremap <Leader>tag :Tagbar<CR>:wincmd l<CR>
-
-" Floobits
-nmap mff :FlooFollowUser<CR>
-nmap mft :FlooToggleFollowMode<CR>
-nmap mfs :FlooSummon<CR>
-nmap mfc :FlooSaySomething 
-nmap mfj :FlooJoinWorkspace 
-nmap mfl :FlooLeaveWorkspace<CR>
 
 " Quick replace-all
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/

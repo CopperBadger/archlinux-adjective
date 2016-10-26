@@ -1,5 +1,5 @@
-# Lines configured by zsh-newuser-install
-HISTFILE=~/.histfile
+# lines configured by zsh-newuser-install
+histfile=~/.histfile
 HISTSIZE=1000
 SAVEHIST=1000
 setopt beep extendedglob
@@ -16,7 +16,8 @@ compinit
 
 # User configuration
 # ---
-export EDITOR="vim"
+export EDITOR="/usr/bin/nvim"
+export SYSTEM_EDITOR="/usr/bin/nvim"
 export TERM="screen-256color"
 
 # Symbols
@@ -76,22 +77,72 @@ alias toriel='nctlup toriel'
 
 alias vim='nvim'
 
+# Git aliases
 alias gst='git status'
 alias gd='git diff'
+alias gpod='git push origin development'
+alias gap='git add -p .'
 
+alias src='source ~/.zshrc'
+alias vsrc='vim ~/.zshrc; source ~/.zshrc'
+
+# Network stuff
 ne(){
   sudo vim /etc/netctl/$1
 }
 alias nu='nctlup'
 alias ns='sudo netctl status'
+alias no='nctldown'
 
 # Package management aliases
 alias pa='pacaur'
-alias pas='pacaur -S'
+alias pas='pacaur -S --needed'
+alias par='pacaur -Ru'
 alias yaourt='pacaur'
 pfind() {
   # Search the Arch repo and AUR for a package with colors
-  pacaur -Ss --color always $1 | less -R
+  pacaur -Ss --color always $1 | paste -d " " - - | sed 's/    /\//;s/\s{2,}//' | column -ts '/' -o " " | sed -E 's/^(.{'"${COLUMNS}"'}).+$/\1.../' | less -RX
+}
+
+# Service management aliases
+alias st='sudo systemctl start'
+alias rst='sudo systemctl restart'
+alias stp='sudo systemctl stop'
+alias sts='sudo systemctl status'
+alias rld='sudo systemctl reload'
+
+# Video functions
+video-on()  { xrandr --output $1 --auto }
+video-off() { xrandr --output $1 --off }
+alias video-up='video-on'
+alias video-down='video-off'
+
+declare -A replacements
+replacements[o]=--output
+replacements[V]=VGA-1
+replacements[e]=eDP-1
+replacements[H]=HDMI-1
+replacements[left]=--left-of
+replacements[right]=--right-of
+replacements[off]=--off
+replacements[on]=--auto
+xr() {
+  cmd=()
+  for arg in $@; do
+    idx=$(( ${#cmd[@]} + 1 ))
+    if [[ ! -z "${replacements[${arg}]}" ]]; then
+      cmd[${idx}]=${replacements[${arg}]}
+    else
+      cmd[${idx}]="${arg}"
+    fi
+  done
+  echo "Running xrandr ${cmd[@]}"
+  xrandr ${cmd[@]}
+}
+
+fix() {
+  nohup lb-restart
+  update-wallpaper
 }
 
 alias ffont='fc-list | grep'

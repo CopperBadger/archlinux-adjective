@@ -1,6 +1,24 @@
+writeSSID() {
+  echo "SID$1" > "/tmp/i3_lemonbar_${USER}"
+}
+
+trap 'writeSSID ""' INT TERM
+
 echo "Setting interface down..."
 sudo ip link set wlp2s0 down
+sudo ip link set enp3s0 down
 echo "Disabling all profiles..."
 sudo netctl stop-all
+writeSSID "Connecting..."
 echo "Enabling wifi profile \"$1\"..."
 sudo netctl start $1
+writeSSID ""
+
+# Make lemonbar update immediately
+profile=$1
+if (( $? != 0 )); then
+  profile=""
+else
+  profile="$(echo ${profile} | awk '{ print toupper($0) }')"
+fi
+writeSSID "${profile}"
