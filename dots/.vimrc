@@ -98,7 +98,6 @@ map <space> :
 imap kj <ESC>
 vmap vkj <ESC>
 imap kq <ESC>A
-imap kw <ESC>O
 
 " Life-improvers
 nmap - ^

@@ -12,13 +12,6 @@ sudo netctl stop-all
 writeSSID "Connecting..."
 echo "Enabling wifi profile \"$1\"..."
 sudo netctl start $1
-writeSSID ""
 
 # Make lemonbar update immediately
-profile=$1
-if (( $? != 0 )); then
-  profile=""
-else
-  profile="$(echo ${profile} | awk '{ print toupper($0) }')"
-fi
-writeSSID "${profile}"
+writeSSID "$(cnetwork)"

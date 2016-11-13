@@ -94,14 +94,26 @@ alias nu='nctlup'
 alias ns='sudo netctl status'
 alias no='nctldown'
 
-# Package management aliases
+# Package management aliases and functions
 alias pa='pacaur'
 alias pas='pacaur -S --needed'
 alias par='pacaur -Ru'
-alias yaourt='pacaur'
+pprune() {
+  getOrphans() {
+    echo pacaur -Qdt | cut -d " " -f 1 | tr '\n' ' '
+  }
+  targets="$(getOrphans)"
+  until [ -z "${target}" ]; do
+    par ${targets}
+    targets="$(getOrphans)"
+  done
+
+  echo "All orphans removed"
+}
 pfind() {
   # Search the Arch repo and AUR for a package with colors
-  pacaur -Ss --color always $1 | paste -d " " - - | sed 's/    /\//;s/\s{2,}//' | column -ts '/' -o " " | sed -E 's/^(.{'"${COLUMNS}"'}).+$/\1.../' | less -RX
+  # This will one day become a program with searching functions
+  pacaur -Ss --color always $1 | paste -d " " - - | sed 's/    /\//;s/\s{2,}//;s/\t//' | column -ts '/' -o " " | sed -E 's/^(.{'"$((  COLUMNS + 21 ))"'}).+$/\1.../' | less -RX
 }
 
 # Service management aliases
@@ -141,8 +153,20 @@ xr() {
 }
 
 fix() {
-  nohup lb-restart
+  lb-restart &
   update-wallpaper
+}
+
+vleft() {
+  xr o V on o e right V
+  sleep 1
+  fix
+}
+
+voff() {
+  xr o V off
+  sleep 1
+  fix
 }
 
 alias ffont='fc-list | grep'
