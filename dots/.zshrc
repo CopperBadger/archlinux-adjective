@@ -67,13 +67,35 @@ bindkey "^K" up-line-or-history
 # Aliases
 alias ls='ls --color=always'
 alias vol='lemonvol'
-alias mute='lemonvol M'
+# alias mute='lemonvol M'
+mute() {
+  if [ -z "$1" ]; then
+    lemonvol M
+  else
+    # Toggle a particular application's PulseAudio muted status
+    sinks=$(pacmd list-sink-inputs | grep -e index -e "application.name = " | paste -d " " - -)
+    idx=$(echo "${sinks}" | grep -i "$1" | sed -Ee 's/^.*\:\ ([0-9]+)\ .*$/\1/' | head -n 1)
+    if [ -z "${idx}" ]; then
+      echo "Failed to find any. These are the available sinks:"
+      echo "${sinks}"
+    else
+      if [ -z "$2" ]; then
+        pacmd set-sink-input-mute ${idx} true
+      else 
+        pacmd set-sink-input-mute ${idx} $2
+      fi
+    fi
+  fi
+}
+
+unmute() {
+  mute $1 false
+}
 alias bl='light -S'
 alias clock='date +%c'
 alias rm='safe-rm'
 
 alias cb='xclip -selection clipboard'
-alias toriel='nctlup toriel'
 
 alias vim='nvim'
 
