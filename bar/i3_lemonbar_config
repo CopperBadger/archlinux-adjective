@@ -3,7 +3,8 @@
 
 panel_fifo="/tmp/i3_lemonbar_${USER}"
 geometry="x34"
-font="Roboto-10:style=bold"
+font="Roboto-9:style=Bold"
+#font="NotoSans-10"
 iconfont="FontAwesome-11"
 res_w=$(xrandr | grep "current" | awk '{print $8a}')
 
@@ -12,11 +13,11 @@ cpu_alert=20                        # % cpu use
 net_alert=5                         # K net use
 
 # update setting, in seconds (conky update in i3_lemonbar_conky
-upd_vol=30        # Volume update
-# upd_mail=300    # Mail check update
-# upd_mpd=5       # MPD song update
-upd_bat=30        # Battey update
-upd_ssid=5        # SSID update
+upd_vol=3                           # Volume update
+upd_mail=300                        # Mail check update
+upd_mpd=5                           # MPD song update
+upd_bat=5                           # Battey update
+upd_ssid=30                         # SSID update
 
 # --- APPLY XRES BEGIN
 c_red_l="#fffb4934"
@@ -40,33 +41,48 @@ c_white_l="#fffbf1c7"
 c_black_l="#ff665c54"
 # --- APPLY XRES END
 
-# color definitions 
+# Colors
 
-# Dark
-color_bgdark="$c_background"
-color_bgdarkhl="$c_black_l"
-color_fgdark="$c_black_l"
+# General Colors
+color_back="$c_background"
+color_fore="$c_foreground"
+color_normalbg="$color_back"
+color_normalfg="$color_fore"
+color_normalul="$c_black_l"
 
-# Light
-color_bglight="$c_white_l"
-color_bglighthl="$c_white_d"
-color_fglight="$c_foreground"
+# Colors for muted elements
+color_mutedbg="$color_back"
+color_mutedfg="$c_black_l"
 
-# Accent
-color_accent1="$c_green_l"
-color_accent1text="$c_black_l"
+# Colors for unselected workspaces
+color_uwspbg="$color_back"
+color_uwspfg="$color_mutedfg"
 
-color_back="$color_bgdark"      # Default background
-color_fore="$color_fglight"     # Default foreground
-color_head="$color_bgdark"      # Background for unselected workspaces
-color_wsp="$color_bgdarkhl"     # Background for selected workspace
-color_icon="$color_fglight"     # For icons
-color_clockbg="$color_bglight"  # Color for clock
-color_clockfg="$color_fgdark"   # Color for clock
+# Colors for selected workspace
+color_wspbg="$color_back"
+color_wspul="$c_yellow_l"
+color_wspfg="$c_yellow_l"
 
-color_success="$c_green_l"           # Positive color for good times
-color_warning="$c_yellow_l"           # Yellow color for warnings (eg, low battery)
-color_critical="$c_red_l"          # Red color for critical meters
+# Colors for clock area
+color_clockbg="$color_fore"
+color_clockul="$color_fore"
+color_clockfg="$color_back"
+
+# Colors for battery monitor
+color_success="$c_green_d"
+color_successbg="$color_back"
+color_successul="$c_green_d"
+color_successfg="$c_green_l"
+
+color_warning="$c_yellow_l"
+color_warningbg="$color_back"
+color_warningul="$c_yellow_d"
+color_warningfg="$c_yellow_l"
+
+color_critical="$c_red_l"
+color_criticalbg="$c_red_d"
+color_criticalul="$c_red_l"
+color_criticalfg="$c_white_l"
 
 #default space between sections
 stab='    '
@@ -137,4 +153,4 @@ icon_mute=""
 icon_charging=""
 icon_dl=""
 icon_ul=""
-icon_ssid=""
+icon_ssid=""

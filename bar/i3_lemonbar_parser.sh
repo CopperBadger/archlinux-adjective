@@ -20,14 +20,13 @@ while read -r line ; do
 
       # date
       date="${sys_arr[0]} ${sys_arr[1]} ${sys_arr[2]}"
-      date="%{B${color_bgdarkhl} T2}   ${icon_calendar} %{T1} ${date}"
+      date="%{+u B${color_clockbg} F${color_clockfg} U${color_clockul} T2}   ${icon_calendar} %{T1} ${date}"
 
       # time
-      time="%{T2}${icon_clock}  %{T1}${sys_arr[3]}   %{F- B-}"
+      time="%{T2}${icon_clock}  %{T1}${sys_arr[3]}   %{-u F- B- U-}"
 
       # cpu
       cpu="%{T2}  ${icon_cpu}  %{T1}${sys_arr[4]}% %{F- B-}"
-      # cpu="%{F${cpu_cback} T3}${sep_left}%{F${cpu_cicon} B${cpu_cback}} %{T2}${icon_cpu}%{F${cpu_cfore} T1} ${sys_arr[4]}%%"
 
       # mem
       mem="%{F${cpu_cicon} T3}${sep_l_left} %{T2}${icon_mem}%{F${cpu_cfore} T1} ${sys_arr[5]}"
@@ -53,15 +52,16 @@ while read -r line ; do
       #   [0] Muted indicator: (M=Muted / (anything else)=Unmuted)
       #   [1] On/off (muted) status (1=Unmuted / 0=Muted)
       vol_arr=(${line#???})
-      vol_frg=-
-      vol_oln=-
+      vol_fg=-
+      vol_bg=-
       vol_ico=$icon_vol
       vol_txt=${vol_arr[1]}
       if [[ ${vol_arr[0]} == "M" ]]; then
-        vol_frg=${color_fgdark}
+        vol_fg=${color_mutedfg}
+        vol_bg=${color_mutedbg}
         vol_ico="${icon_mute}  "
       fi
-      vol="%{B- F${vol_frg} T2}  ${vol_ico} %{T1} ${vol_txt}%{F- B-}"
+      vol="%{A:lemonvol M:}%{B${vol_bg} F${vol_fg} T2}  ${vol_ico} %{T1}  ${vol_txt} %{A}%{F- B-}"
       ;;
 
     GMA*)
@@ -101,35 +101,34 @@ while read -r line ; do
       else
         ico="${bat_icons[$(((${bat_arr[0]}*(${#bat_icons[@]}-1))/100))]}"
       fi
-      bkg="${color_bgdark}"
-      frg="${color_fglight}"
-      oln="${bkg}"
+      level=color_normal
 
       if [[ ${bat_arr[2]} == "L" ]]; then
-        oln="${color_warning}"
-        bkg="${color_bgdarkhl}"
+        level=color_warning
       elif [[ ${bat_arr[2]} == "C" ]]; then
-        oln="${color_critical}"
-        bkg="${color_critical}"
+        level=color_critical
       elif [[ ${bat_arr[2]} == "F" ]]; then
-        oln="${color_success}"
-        bkg="${color_bgdarkhl}"
+        level=color_success
       fi
 
-      batamt="%{+u U${oln} B${bkg}} %{F${frg} T2} ${ico} %{T1}${bat_arr[0]}%  %{-u B-}"
+      eval batbg=\$${level}bg
+      eval batfg=\$${level}fg
+      eval batul=\$${level}ul
+
+      batamt="%{+u U${batul} B${batbg}} %{F${batfg} T2}   ${ico} %{T1}${bat_arr[0]}%   %{-u B-}"
       ;;
 
     WSP*)
       # I3 Workspaces
-      wsp="%{F${color_fglight} B${color_bgdark} T1}"
+      wsp="%{T1}"
       set -- ${line#???}
       while [ $# -gt 0 ] ; do
         case $1 in
          FOC*)
-           wsp="${wsp}%{+u B${color_bgdarkhl} U${color_accent1} T1}   ${1##????}   %{-u B${color_bgdark} F${color_fglight}}"
+           wsp="${wsp}%{+u B${color_wspbg} U${color_wspul} F${color_wspfg} T1}   ${1##????}   %{-u B${color_back} F${color_fore}}"
            ;;
          INA*|URG*|ACT*)
-           wsp="${wsp}%{F${color_fglight} T1}   ${1##????}   "
+           wsp="${wsp}%{A:i3 workspace ${1##???}:}%{F${color_uwspfg} B${color_uwspbg} T1}   ${1##????}   %{A}"
            ;;
         esac
         shift
@@ -149,5 +148,5 @@ while read -r line ; do
   esac
 
   # And finally, output
-  printf "%s\n" "%{U${color_accent1} l}${wsp} %{r}${ssid}${stab}${cpu}${stab}${vol}${stab}${batamt}${date}${stab}${time}"
+  printf "%s\n" "%{l}${wsp} %{r}${ssid}${stab}${cpu}${stab}${vol}${stab}${batamt}${date}${stab}${time}"
 done

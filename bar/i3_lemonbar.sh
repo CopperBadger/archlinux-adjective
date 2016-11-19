@@ -23,7 +23,6 @@ xprop -spy -root _NET_ACTIVE_WINDOW | sed -un 's/.*\(0x.*\)/WIN\1/p' > "${panel_
 
 # i3 Workspaces, "WSP"
 $(dirname $0)/i3ws > ${panel_fifo} &
-# $(dirname $0)/i3_workspaces.py > ${panel_fifo} &
 
 # IRC, "IRC"
 # only for init
@@ -34,8 +33,8 @@ conky -c $(dirname $0)/i3_lemonbar_conky > "${panel_fifo}" &
 
 ### UPDATE INTERVAL METERS
 cnt_vol=${upd_vol}
-# cnt_mail=${upd_mail}
-# cnt_mpd=${upd_mpd}
+cnt_mail=${upd_mail}
+cnt_mpd=${upd_mpd}
 cnt_bat=${upd_bat}
 cnt_ssid=${upd_ssid}
 
@@ -61,7 +60,7 @@ while :; do
 
   # SSID, "SID"
   if [ $((cnt_ssid++)) -ge ${upd_ssid} ]; then
-    echo "SID$(iwgetid -r)" > "${panel_fifo}" &
+    echo "SID$(cnetwork)" > "${panel_fifo}" &
     cnt_ssid=0
   fi
 
@@ -73,7 +72,9 @@ done &
 #### LOOP FIFO
 
 cat "${panel_fifo}" | $(dirname $0)/i3_lemonbar_parser.sh \
-  | lemonbar -p -b -f "${font}" -f "${iconfont}" -g "${geometry}" -B "${color_back}" -F "${color_fore}" -u 3 &
+  | lemonbar -p -b -f "${font}" -f "${iconfont}" -g "${geometry}" -B "${color_back}" -F "${color_fore}" -u 3 \
+  2> /dev/null \
+  | zsh > /dev/null &
 
 wait
 
