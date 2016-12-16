@@ -181,6 +181,8 @@ bindsym $mod+bracketright exec lemonvol +
 bindsym $mod+bracketleft exec lemonvol -
 bindsym XF86AudioMute exec lemonvol M
 bindsym $mod+bar exec lemonvol M
+bindsym $mod+minus exec mute this
+bindsym $mod+equal exec unmute this
 bindsym XF86AudioPause exec lempc pause
 bindsym XF86AudioPlay exec lempc pause
 bindsym XF86AudioNext exec lempc next
@@ -219,13 +221,10 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Window assignments
-assign [class="chromium"] $ws1
-assign [class="Firefox"] $ws1
-assign [class="Wicd"] $ws3
-assign [class="Telegram"] $ws4
-assign [class="Thunderbird"] $ws4
-assign [class="Spotify"] $ws9
-
+assign [class="romium"] $ws1
+assign [class="irefox"] $ws1
+assign [class="elegram"] $ws4
+assign [class="potify"] $ws9
 
 bar {
   i3bar_command ~/.i3/lemonbar/i3_lemonbar.sh

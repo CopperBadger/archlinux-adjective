@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if [ -z "$1" ] || [ "$1" == "false" ]; then
+  lemonvol M
+else
+  query=$1
+  if [ "$1" == "this" ]; then
+    query="$(xdotool getwindowfocus getwindowpid)"
+    echo "Using $query"
+  fi
+
+  # Toggle a particular application's PulseAudio muted status
+  sinks=$(pacmd list-sink-inputs | grep -e index -e "application.name = " -e "application.process.id = " | paste -d " " - - - )
+  idx=$(echo "${sinks}" | grep -i "$query" | sed -Ee 's/^.*\:\ ([0-9]+)\ .*$/\1/' | head -n 1)
+  if [ -z "${idx}" ]; then
+    echo "Failed to find any. These are the available sinks:"
+    echo "${sinks}"
+  else
+    if [ -z "$2" ]; then
+      pacmd set-sink-input-mute ${idx} true
+    else 
+      pacmd set-sink-input-mute ${idx} $2
+    fi
+  fi
+fi

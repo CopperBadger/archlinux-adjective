@@ -3,8 +3,10 @@
 
 panel_fifo="/tmp/i3_lemonbar_${USER}"
 geometry="x34"
-font="Roboto-9:style=Bold"
+#font="PermanentMarker-10:style=Regular"
+font="ArchivoNarrow-10:style=Bold"
 #font="NotoSans-10"
+#font="Roboto-9:style=Bold"
 iconfont="FontAwesome-11"
 res_w=$(xrandr | grep "current" | awk '{print $8a}')
 

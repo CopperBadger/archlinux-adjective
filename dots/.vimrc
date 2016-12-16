@@ -7,6 +7,7 @@ set smartindent
 set nocompatible
 set magic
 set fillchars+=vert:█
+set smartcase
 color default
 
 " Set the runtime path to include Vundle and initialize
@@ -85,14 +86,6 @@ nmap w :join<CR>
 " Capital U = redo
 nmap <S-u> <C-r>
 
-" Line-moving superpowers
-nnoremap <C-j> :m .+1<CR>==
-nnoremap <C-k> :m .-2<CR>==
-inoremap <C-j> <Esc>:m .+1<CR>==gi
-inoremap <C-k> <Esc>:m .-2<CR>==gi
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
-
 " Life-changers
 map <space> :
 imap kj <ESC>
@@ -101,6 +94,7 @@ imap kq <ESC>A
 
 " Life-improvers
 nmap - ^
+nmap <Leader>at {V}gq
 
 " Highlight Killer
 nnoremap <Leader>hl :nohl<CR>

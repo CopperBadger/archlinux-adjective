@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mute $1 false

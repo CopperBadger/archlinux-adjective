@@ -67,30 +67,7 @@ bindkey "^K" up-line-or-history
 # Aliases
 alias ls='ls --color=always'
 alias vol='lemonvol'
-# alias mute='lemonvol M'
-mute() {
-  if [ -z "$1" ]; then
-    lemonvol M
-  else
-    # Toggle a particular application's PulseAudio muted status
-    sinks=$(pacmd list-sink-inputs | grep -e index -e "application.name = " | paste -d " " - -)
-    idx=$(echo "${sinks}" | grep -i "$1" | sed -Ee 's/^.*\:\ ([0-9]+)\ .*$/\1/' | head -n 1)
-    if [ -z "${idx}" ]; then
-      echo "Failed to find any. These are the available sinks:"
-      echo "${sinks}"
-    else
-      if [ -z "$2" ]; then
-        pacmd set-sink-input-mute ${idx} true
-      else 
-        pacmd set-sink-input-mute ${idx} $2
-      fi
-    fi
-  fi
-}
-
-unmute() {
-  mute $1 false
-}
+# mute and unmute are now their own scripts
 alias bl='light -S'
 alias clock='date +%c'
 alias rm='safe-rm'
@@ -121,22 +98,57 @@ alias pa='pacaur'
 alias pas='pacaur -S --needed'
 alias par='pacaur -Ru'
 pprune() {
+
   getOrphans() {
     echo pacaur -Qdt | cut -d " " -f 1 | tr '\n' ' '
   }
+
+  # Repeatedly kill orphans until none remain o-o
+  iterations=0
   targets="$(getOrphans)"
   until [ -z "${target}" ]; do
+    let ++iterations
     par ${targets}
     targets="$(getOrphans)"
   done
 
-  echo "All orphans removed"
+  # Report an appropriate message to the user
+  if (( iterations == 0 )); then
+    echo "No orphans found"
+  else
+    echo "All orphans removed!"
+  fi
 }
+
 pfind() {
   # Search the Arch repo and AUR for a package with colors
-  # This will one day become a program with searching functions
-  pacaur -Ss --color always $1 | paste -d " " - - | sed 's/    /\//;s/\s{2,}//;s/\t//' | column -ts '/' -o " " | sed -E 's/^(.{'"$((  COLUMNS + 21 ))"'}).+$/\1.../' | less -RX
+  pacaur -Ss --color always $1 | \
+  paste -d " " - - | \
+  perl -n -e '/([^\/]+)\/([^\s]+)\s(.+)\s{4,}(.{0,80}).*/ && print "$1$2| $4$3\n"' | \
+  column -ts '' -o " " | \
+  sed -E 's/^(.{'"$((  COLUMNS + 21 ))"'}).+$/\1.../' | \
+  less -RX
 }
+plocal() {
+  pacaur -Qs --color always $1 | \
+  paste -d " " - - | \
+  perl -n -e '/([^\/]+)\/([^\s]{3,15})[^\s]*\s(.+)\s{4,}(.{0,80}).*/ && print "$1 $2| $4| $3\n"' | \
+  column -ts '' -o " " | \
+  sed -E 's/.{3}\|/...|/' | \
+  sed -E 's/^(.{'"$((  COLUMNS + 21 ))"'}).+$/\1.../' | \
+  less -RX
+}
+
+pinfo() {
+  if [ -z "$(pacman -Q $1 2> /dev/null)" ]; then
+    echo "Notice: Package $1 not installed"
+    pacaur -Si $1
+  else
+    pacman -Qi $1
+  fi
+}
+
+alias pinstall='pas'
 
 # Service management aliases
 alias st='sudo systemctl start'

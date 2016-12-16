@@ -1,0 +1,96 @@
+#!/bin/bash
+
+# Settings
+# TODO -- These need to be cmd args
+mergedinto=(master development)
+excludedbranches="master development develop"
+
+branches=($(git branch | sed -e 's/^..//'))
+
+nbranches="${#branches[@]}"
+
+c_reset="\e[39m"
+c_red="\e[31m"
+c_green="\e[32m"
+c_yellow="\e[33m"
+c_blue="\e[34m"
+c_magenta="\e[35m"
+c_cyan="\e[36m"
+
+isMerged() {
+  # checks if $1 has been merged into $2
+  [[ -z "$(git branch --merged $2 | grep $1)" ]] && echo "merged";
+}
+
+isExcluded() {
+  [[ ! -z "$(grep $1 <<< ${excludedbranches})" ]] && echo "excluded";
+}
+
+commands() {
+  echo "
+  d -- delete this branch
+  D -- force delete this branch (must be used to discard unmerged changes)
+  l -- display the log for this branch and ask again
+  L -- display a decorated log for this branch and ask again
+  k -- keep this branch
+  q -- quit
+  ? -- display this help text and ask again
+"
+}
+
+i=0
+
+for b in "${branches[@]}"; do
+  repeat=1
+  let i=i+1
+
+  if [[ ! -z "$(isExcluded $b)" ]]; then
+    echo -e "${c_cyan}Skipping ${b}${c_reset}"
+    continue
+  fi
+
+  while (( repeat == 1 )); do
+    echo -e "\n========================================\n"
+    echo -e "[$i / $nbranches] Branch: ${c_magenta}${b}${c_reset}"
+
+    # Display merged status
+    for mrg in "${mergedinto[@]}"; do
+      if [[ -z "$(isMerged ${b} ${mrg})" ]]; then
+        echo -e "> ${c_green}Even with ${mrg}.${c_reset}"
+      else
+        echo -e "> ${c_red}Has changes not merged into ${mrg}.${c_reset}"
+      fi
+    done
+
+    # Display latest commit
+    echo "Latest non-merge commit:"
+    git log -1 --name-only --color=always "${b}" | sed -e 's/^/  | /'
+
+    read -p "What would you like to do? [d,D,l/L,k,q,?] " cmd
+
+    case "${cmd}" in
+      d|D)
+        echo -e "${c_blue}Deleting ${b}...${c_reset}"
+        git branch -${cmd} "${b}"
+        repeat=0
+        ;;
+      l)
+        git log --color=always ${b} ;;
+      L)
+        git log --color=always -p --graph --decorate ${b} ;;
+      k|K)
+        echo -e "${c_green}Keeping ${b}${c_reset}"
+        repeat=0
+        ;;
+      q)
+        exit 1 ;;
+      *)
+        commands ;;
+    esac
+
+  done
+done
+
+echo -e "\n${c_green}Branch cleanup complete!${c_reset} Here are your branches: "
+
+git branch
