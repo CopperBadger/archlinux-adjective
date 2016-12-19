@@ -125,7 +125,7 @@ while read -r line ; do
       while [ $# -gt 0 ] ; do
         case $1 in
          FOC*)
-           wsp="${wsp}%{+u B${color_wspbg} U${color_wspul} F${color_wspfg} T1}   ${1##????}   %{-u B${color_back} F${color_fore}}"
+           wsp="${wsp}%{+u B${color_wspbg} U${color_wspul} F${color_wspfg} T1}   ${1##????}   %{-u}"
            ;;
          INA*|URG*|ACT*)
            wsp="${wsp}%{A:i3 workspace ${1##???}:}%{F${color_uwspfg} B${color_uwspbg} T1}   ${1##????}   %{A}"
@@ -133,6 +133,7 @@ while read -r line ; do
         esac
         shift
       done
+      wsp="${wsp}%{B${color_back} F${color_fore}}"
       ;;
       
     WIN*)

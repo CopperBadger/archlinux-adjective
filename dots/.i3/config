@@ -74,7 +74,7 @@ set $c_foreground #ebdbb2
 # --- APPLY XRES END
 
 #class                  background?   border        text          split
-client.focused          $c_black_l    #463c38       $c_black_l    $c_black_l
+client.focused          $c_black_l    #f2f0d8       $c_black_l    $c_black_l
 client.focused_inactive $c_black_d    $c_background $c_black_l    $c_black_d
 client.unfocused        $c_black_d    $c_background $c_black_l    $c_black_d
 client.urgent           $c_magenta_l  $c_magenta_l  $c_black_l    $c_magenta_l

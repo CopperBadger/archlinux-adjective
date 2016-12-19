@@ -3,8 +3,8 @@
 
 panel_fifo="/tmp/i3_lemonbar_${USER}"
 geometry="x34"
-#font="PermanentMarker-10:style=Regular"
-font="ArchivoNarrow-10:style=Bold"
+font="PermanentMarker-8:style=Regular"
+#font="ArchivoNarrow-10:style=Bold"
 #font="NotoSans-10"
 #font="Roboto-9:style=Bold"
 iconfont="FontAwesome-11"
@@ -43,42 +43,50 @@ c_white_l="#fffbf1c7"
 c_black_l="#ff665c54"
 # --- APPLY XRES END
 
+# Christmas Colors
+# Taken from https://color.adobe.com/Classic-Christmas-color-theme-2868486
+holiday_green_d="#ff142715"
+holiday_green_l="#ff667432"
+holiday_cream="#fff2f0d8"
+holiday_red_l="#ffe02526"
+holiday_red_d="#ffa11d21"
+
 # Colors
 
 # General Colors
-color_back="$c_background"
-color_fore="$c_foreground"
+color_back="$holiday_cream"
+color_fore="$holiday_green_d"
 color_normalbg="$color_back"
 color_normalfg="$color_fore"
-color_normalul="$c_black_l"
+color_normalul="$color_back"
 
 # Colors for muted elements
 color_mutedbg="$color_back"
 color_mutedfg="$c_black_l"
 
 # Colors for unselected workspaces
-color_uwspbg="$color_back"
-color_uwspfg="$color_mutedfg"
+color_uwspbg="$holiday_red_d"
+color_uwspfg="$holiday_red_l"
 
 # Colors for selected workspace
-color_wspbg="$color_back"
-color_wspul="$c_yellow_l"
-color_wspfg="$c_yellow_l"
+color_wspbg="$color_uwspbg"
+color_wspul="$color_wspbg"
+color_wspfg="$holiday_cream"
 
 # Colors for clock area
-color_clockbg="$color_fore"
-color_clockul="$color_fore"
-color_clockfg="$color_back"
+color_clockbg="$holiday_green_l"
+color_clockul="$color_clockbg"
+color_clockfg="$holiday_cream"
 
 # Colors for battery monitor
-color_success="$c_green_d"
+color_success="$holiday_green_l"
 color_successbg="$color_back"
-color_successul="$c_green_d"
-color_successfg="$c_green_l"
+color_successul="$holiday_green_l"
+color_successfg="$color_fore"
 
 color_warning="$c_yellow_l"
 color_warningbg="$color_back"
-color_warningul="$c_yellow_d"
+color_warningul="$c_yellow_l"
 color_warningfg="$c_yellow_l"
 
 color_critical="$c_red_l"
