@@ -26,17 +26,17 @@ set $left h
 set $right l
 set $mod Mod4
 
-# Note I use en spaces (u0x2002) so the bar thinks they are just one word
-set $ws1 9 web
-set $ws2 8 sh
-set $ws3 7 app
-set $ws4 6 mail
-set $ws5 5 sh2
-set $ws6 4 sh3
-set $ws7 3 sh4
-set $ws8 2 sh5
-set $ws9 1 music
-set $ws10 0 game
+# Note I use special spaces (u0x00a0) so the bar thinks they are just one word
+set $ws1 9 web
+set $ws2 8 sh
+set $ws3 7 app
+set $ws4 6 mail
+set $ws5 5 sh2
+set $ws6 4 sh3
+set $ws7 3 sh4
+set $ws8 2 sh5
+set $ws9 1 music
+set $ws10 0 game
 
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
