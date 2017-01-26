@@ -79,8 +79,9 @@ alias vim='nvim'
 # Git aliases
 alias gst='git status'
 alias gd='git diff'
-alias gpod='git push origin development'
+#alias gpod='git push origin development'
 alias gap='git add -p .'
+alias gmend='git commit --amend'
 
 alias src='source ~/.zshrc'
 alias vsrc='vim ~/.zshrc; source ~/.zshrc'
