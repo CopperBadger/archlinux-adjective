@@ -2,12 +2,14 @@
 # i3 panel config. Powerline style.
 
 panel_fifo="/tmp/i3_lemonbar_${USER}"
-geometry="x34"
+geometry="x32"
+uline_thickness=2
 #font="PermanentMarker-8:style=Regular"
 #font="ArchivoNarrow-10:style=Bold"
-#font="NotoSans-10"
-font="Roboto-9:style=Bold"
-iconfont="FontAwesome-11"
+#font="NotoSans-8:style=Bold"
+#font="Roboto-8:style=Bold"
+font="RobotoCondensed-9:style=Bold"
+iconfont="FontAwesome-10"
 res_w=$(xrandr | grep "current" | awk '{print $8a}')
 
 # Alarm settings
@@ -66,12 +68,12 @@ color_mutedfg="$c_black_l"
 
 # Colors for unselected workspaces
 color_uwspbg="$color_back"
-color_uwspfg="$color_fore"
+color_uwspfg="$c_black_l"
 
 # Colors for selected workspace
-color_wspbg="$color_uwspbg"
-color_wspul="$color_wspbg"
+color_wspbg="$c_black_d"
 color_wspfg="$c_yellow_l"
+color_wspul="$c_yellow_d"
 
 # Colors for clock area
 color_clockbg="$color_fore"
@@ -151,7 +153,7 @@ icon_cpu=""                          # CPU icon
 icon_home=""                         # Home icon (also linux)
 #icon_laptop=""                       # Laptop icon
 icon_linux=""                        # Linux (Tux) icon
-icon_mail=""                         # Email icon
+icon_mail=""                         # Email icon
 #icon_mem="?"                          # Memory icon
 icon_music=""                        # Music icon
 icon_paw=""                          # Paw icon

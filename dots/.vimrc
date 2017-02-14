@@ -20,17 +20,15 @@ Plugin 'scrooloose/syntastic'
 Plugin 'scrooloose/nerdtree'
 Plugin 'tpope/vim-surround'
 Plugin 'terryma/vim-multiple-cursors'
-" Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'majutsushi/tagbar'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'Raimondi/delimitMate'
 Plugin 'tbastos/vim-lua'
-Plugin 'bling/vim-airline'
+" Plugin 'bling/vim-airline'
 Plugin 'ryanoasis/vim-devicons'
 Plugin 'morhetz/gruvbox'
 Plugin 'haskell.vim'
-Plugin 'kchmck/vim-coffee-script'
 
 call vundle#end()
 
@@ -60,9 +58,9 @@ let g:UltiSnipsJumpForwardTrigger="<c-o>"
 let g:UltiSnipsJumpBackwardTrigger="<c-i>"
 
 " Airline Config
-let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline#extensions#tabline#fnamemod = ':t'
+" let g:airline#extensions#tabline#enabled = 1
+" let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#fnamemod = ':t'
 
 " Python Config
 let g:python_host_prog = '/usr/bin/python2'
@@ -116,8 +114,7 @@ nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
 " Color Scheme Modifications
 set background=dark
-let g:gruvbox_contrast_dark="soft"
+let g:gruvbox_contrast_dark="medium"
 colorscheme gruvbox
 highlight LineNr ctermfg=darkgrey
-highlight VertSplit ctermbg=black
-
+highlight VertSplit ctermbg=darkgrey

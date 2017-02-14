@@ -27,16 +27,16 @@ set $right l
 set $mod Mod4
 
 # Note I use special spaces (u0x00a0) so the bar thinks they are just one word
-set $ws1 9 web
-set $ws2 8 sh
-set $ws3 7 app
-set $ws4 6 mail
-set $ws5 5 sh2
-set $ws6 4 sh3
-set $ws7 3 sh4
-set $ws8 2 sh5
-set $ws9 1 music
-set $ws10 0 game
+set $ws1 9
+set $ws2 8
+set $ws3 7
+set $ws4 6
+set $ws5 52
+set $ws6 43
+set $ws7 34
+set $ws8 25
+set $ws9 1
+set $ws10 0
 
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -47,8 +47,8 @@ floating_modifier $mod
 # ----
 gaps inner 0
 gaps outer 0
-new_window pixel 2
-new_float pixel 2
+new_window pixel 0
+new_float pixel 0
 
 # Xresource-based. Do not edit manually, will be overwritten by script
 # --- APPLY XRES BEGIN

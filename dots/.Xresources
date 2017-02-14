@@ -1,6 +1,8 @@
-*font: xft:Knack Nerd Font:style=Bold:size=10
+*font: xft:Knack Nerd Font:style=Bold:size=9
 *scrollBar: false
 Xcursor.theme: Breeze-Obsidian
+URxvt.internalBorder: 12
+URxvt.fading: 35
 
 ! --- Rofi
 rofi.color-normal: #282828, #ebdbb2, #282828, #1d2021, #ebdbb2

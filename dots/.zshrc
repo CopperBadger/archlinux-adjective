@@ -44,7 +44,7 @@ source ~/.zsh/git-flow-completion/git-flow-completion.zsh
 # Colorization
 autoload -Uz colors && colors
 
-export PROMPT="%{$bg[white]%}%{$fg[black]%} ADJ %{$reset_color%}%{$fg[white]%}%{$bg[black]%}$(arrow) %3~ %{$reset_color%}%{$bg[yellow]%}%{$fg[black]%}$(arrow) \$vcs_info_msg_0_%{$reset_color%}%{$fg[yellow]%}$(arrow)%{$reset_color%} "
+export PROMPT="%{$bg[white]%}%{$fg[black]%}$(arrow) ADJ %{$reset_color%}%{$fg[white]%}%{$bg[black]%}$(arrow) %3~ %{$reset_color%}%{$bg[yellow]%}%{$fg[black]%}$(arrow) \$vcs_info_msg_0_%{$reset_color%}%{$fg[yellow]%}$(arrow)%{$reset_color%} "
 
 export PATH="$PATH:$HOME/.gem/ruby/2.3.0/bin:$HOME/.cabal/bin"
 
@@ -171,6 +171,8 @@ replacements[e]=eDP-1
 replacements[H]=HDMI-1
 replacements[left]=--left-of
 replacements[right]=--right-of
+replacements[above]=--above
+replacements[below]=--below
 replacements[off]=--off
 replacements[on]=--auto
 xr() {
@@ -216,7 +218,7 @@ j() {
 }
 
 # Print battery percentage on startup
-echo -e " Battery `batpct`"
+# echo -e " Battery `batpct`"
 
 # Source private, non vc'd stuff
 source "$HOME/.zsh-profile"
