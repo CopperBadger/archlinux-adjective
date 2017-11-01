@@ -5,7 +5,7 @@ if [[ -z "$(pacman -Qs yaourt)" ]]; then
   exit 1
 fi
 
-yaourt -S --needed xorg-server xorg-xinit feh rofi ttf-font-awesome powerline-fonts-git pulseaudio pulseaudio-ctl noto-fonts conky xorg-xrandr i3-gaps-next-git py3status-git i3ipc-python-git xorg-xprop neovim lemonbar-xft-git zsh rxvt-unicode archey3 dunst
+yaourt -S --needed xorg-xset xorg-server xorg-xinit feh rofi ttf-font-awesome powerline-fonts-git pulseaudio pulseaudio-ctl noto-fonts conky xorg-xrandr i3-gaps-next-git py3status-git i3ipc-python-git xorg-xprop neovim lemonbar-xft-git zsh rxvt-unicode archey3 dunst
 
 mkdir -p "$HOME/.fonts"
 if [[ ! "$(fc-match "Knack Nerd Font")" =~ "Knack" ]]; then
