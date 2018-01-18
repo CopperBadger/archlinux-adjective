@@ -1,6 +1,7 @@
 *font: xft:Knack Nerd Font:style=Bold:size=9
 *scrollBar: false
 Xcursor.theme: Breeze-Obsidian
+Xcursor.size: 16
 URxvt.internalBorder: 12
 URxvt.fading: 35
 

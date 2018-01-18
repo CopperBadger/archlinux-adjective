@@ -72,7 +72,7 @@ done &
 #### LOOP FIFO
 
 cat "${panel_fifo}" | $(dirname $0)/i3_lemonbar_parser.sh \
-  | lemonbar -p -f "${font}" -f "${iconfont}" -g "${geometry}" -B "${color_back}" -F "${color_fore}" -u ${uline_thickness} \
+  | lemonbar -p -o -12 -f "${font}" -o -12 -f "${iconfont}" -o 0 -f "${slashfont}" -g "${geometry}" -B "${color_back}" -F "${color_fore}" -u ${uline_thickness} \
   2> /dev/null \
   | zsh > /dev/null &
 

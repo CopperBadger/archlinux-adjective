@@ -10,6 +10,7 @@ uline_thickness=2
 #font="Roboto-8:style=Bold"
 font="RobotoCondensed-9:style=Bold"
 iconfont="FontAwesome-10"
+slashfont="KnackNerdFont-24:style=Bold"
 res_w=$(xrandr | grep "current" | awk '{print $8a}')
 
 # Alarm settings
@@ -67,13 +68,13 @@ color_mutedbg="$color_back"
 color_mutedfg="$c_black_l"
 
 # Colors for unselected workspaces
-color_uwspbg="$color_back"
-color_uwspfg="$c_black_l"
+color_uwspbg="$c_yellow_l"
+color_uwspfg="$c_background"
 
 # Colors for selected workspace
-color_wspbg="$c_black_d"
-color_wspfg="$c_yellow_l"
-color_wspul="$c_yellow_d"
+color_wspbg="$c_yellow_d"
+color_wspfg="$c_black_d"
+color_wspul="$color_wspbg"
 
 # Colors for clock area
 color_clockbg="$color_fore"
@@ -144,25 +145,34 @@ sep_l_right=" "                     # Powerline light sepatator right
 # icon_battery="         "
 # icon_charging=""
 
-# Ionicon glyphs
+# FontAwesome glyphs
 icon_battery="    "
 icon_clock=""                        # Clock icon
 icon_calendar=""
 icon_cpu=""                          # CPU icon
-#icon_globe=""                        # Globe icon
 icon_home=""                         # Home icon (also linux)
-#icon_laptop=""                       # Laptop icon
 icon_linux=""                        # Linux (Tux) icon
 icon_mail=""                         # Email icon
-#icon_mem="?"                          # Memory icon
 icon_music=""                        # Music icon
 icon_paw=""                          # Paw icon
 icon_prog=""                         # Window icon
 icon_shell=""                        # Shell icon
 icon_vol=""                          # Volume icon
 icon_mute=""
-#icon_wsp=""                          # Workspace icon (paw duplicate for now)
 icon_charging=""
 icon_dl=""
 icon_ul=""
 icon_ssid=""
+
+# Slashes + Separators
+
+slash="" # Downward wedge
+# slash="" # Upward Wedge
+# slash="" # Arrow
+# slash="" # Glitchy Edge
+# slash="" # Semicircle
+
+separator="" # Downward wedge
+# separator="" # Upward Wedge
+# separator="" # Arrow
+# separator="" # Semicircle

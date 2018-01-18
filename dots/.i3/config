@@ -36,7 +36,7 @@ set $ws6 43
 set $ws7 34
 set $ws8 25
 set $ws9 1
-set $ws10 0
+set $ws10 0
 
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -74,10 +74,10 @@ set $c_foreground #ebdbb2
 # --- APPLY XRES END
 
 #class                  background?   border        text          split
-client.focused          $c_black_l    $c_black_l       $c_black_l    $c_black_l
-client.focused_inactive $c_black_d    $c_background $c_black_l    $c_black_d
-client.unfocused        $c_black_d    $c_background $c_black_l    $c_black_d
-client.urgent           $c_magenta_l  $c_magenta_l  $c_black_l    $c_magenta_l
+client.focused          $c_black_l    $c_black_l       $c_white_l    $c_white_l
+client.focused_inactive $c_background    $c_background $c_black_l    $c_background
+client.unfocused        $c_black_d    $c_black_d $c_black_l    $c_black_d
+client.urgent           $c_magenta_l  $c_magenta_l  $c_white_l    $c_magenta_l
 client.background       $c_background
 
 
@@ -107,6 +107,7 @@ bindsym $mod+Shift+$right move right
 
 # send workspace to next output
 bindsym $mod+m move workspace to output left
+bindsym $mod+n move workspace to output up
 
 # split in horizontal orientation
 bindsym $mod+u split h
@@ -131,13 +132,6 @@ bindsym $mod+space focus mode_toggle
 # focus the parent / child container
 bindsym $mod+a focus parent
 bindsym $mod+d focus child
-
-# move the currently focused window to the scratchpad
-# bindsym $mod+Shift+minus move scratchpad
-
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
-# bindsym $mod+minus scratchpad show
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
@@ -208,10 +202,10 @@ bindsym Print exec screenshot
 # resize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
-        bindsym $left       resize shrink width 10 px or 10 ppt
-        bindsym $down       resize grow height 10 px or 10 ppt
-        bindsym $up         resize shrink height 10 px or 10 ppt
-        bindsym $right      resize grow width 10 px or 10 ppt
+        bindsym $left       resize shrink width 4 px or 4 ppt
+        bindsym $down       resize grow height 4 px or 4 ppt
+        bindsym $up         resize shrink height 4 px or 4 ppt
+        bindsym $right      resize grow width 4 px or 4 ppt
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"

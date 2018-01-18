@@ -63,8 +63,8 @@ let g:UltiSnipsJumpBackwardTrigger="<c-i>"
 " let g:airline#extensions#tabline#fnamemod = ':t'
 
 " Python Config
-let g:python_host_prog = '/usr/bin/python2'
-let g:python3_host_provider = '/usr/bin/python3'
+" let g:python_host_prog = '/usr/bin/python2'
+" let g:python3_host_provider = '/usr/bin/python3'
 
 " == Custom keybindings
 let mapleader='m'
@@ -92,7 +92,8 @@ imap kq <ESC>A
 
 " Life-improvers
 nmap - ^
-nmap <Leader>at {V}gq
+nmap <Leader>at gqip$
+nmap <Leader>dash 0f\|v$F\|:s/[^\|]/-/g<CR>mhl
 
 " Highlight Killer
 nnoremap <Leader>hl :nohl<CR>

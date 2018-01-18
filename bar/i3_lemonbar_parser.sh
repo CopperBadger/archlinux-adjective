@@ -20,7 +20,7 @@ while read -r line ; do
 
       # date
       date="${sys_arr[0]} ${sys_arr[1]} ${sys_arr[2]}"
-      date="%{+u B${color_clockbg} F${color_clockfg} U${color_clockul} T2}   ${icon_calendar} %{T1} ${date}"
+      date="%{B${color_clockbg} F${color_back} T3}${slash}%{+u B${color_clockbg} F${color_clockfg} U${color_clockul} T2}   ${icon_calendar} %{T1} ${date}"
 
       # time
       time="%{T2}${icon_clock}  %{T1}${sys_arr[3]}   %{-u F- B- U-}"
@@ -120,20 +120,20 @@ while read -r line ; do
 
     WSP*)
       # I3 Workspaces
-      wsp="%{T1}"
+      wsp="%{B${color_uwspbg} T1}  "
       set -- ${line#???}
       while [ $# -gt 0 ] ; do
         case $1 in
          FOC*)
-           wsp="${wsp}%{+u B${color_wspbg} U${color_wspul} F${color_wspfg} T1}   ${1##????}   %{-u}"
+           wsp="${wsp}%{F${color_uwspbg} B${color_wspbg} T3}${slash}%{+u U${color_wspul} F${color_wspfg} T1}  ${1##????}  %{-u B${color_uwspbg} F${color_wspbg} T3}${slash}%{T1}"
            ;;
          INA*|URG*|ACT*)
-           wsp="${wsp}%{A:i3 workspace ${1##???}:}%{F${color_uwspfg} B${color_uwspbg} T1}   ${1##????}   %{A}"
+           wsp="${wsp}%{A:i3 workspace ${1##???}:}%{B${color_uwspbg} F${color_uwspfg} T1}    ${1##????}    %{A}"
            ;;
         esac
         shift
       done
-      wsp="${wsp}%{B${color_back} F${color_fore}}"
+      wsp="${wsp}%{B${color_uwspbg}} %{B${color_back} F${color_uwspbg} T3}${slash} %{F${color_fore} T1}"
       ;;
       
     WIN*)
@@ -143,7 +143,7 @@ while read -r line ; do
       ;;
 
     SID*)
-      ssid="%{F${color_fgdark} T2}  ${icon_ssid}  %{T1}${line#???}"
+      ssid=" %{F${c_black_l} T3}${separator} %{F${color_fgdark} T2}  ${icon_ssid}  %{T1}${line#???}"
       ;;
       
   esac
