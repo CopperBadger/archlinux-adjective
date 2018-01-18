@@ -1,6 +1,11 @@
 #!/bin/bash
 # Battery statistics command for i3 Lemonbar
 
+# If the battery cannot be found, don't print anything
+if [[ ! -e /sys/class/power_supply/BAT0/capacity ]]; then
+  exit
+fi
+
 # Get battery percentage
 CAPACITY=$(cat /sys/class/power_supply/BAT0/capacity) # Charged percentage
 
